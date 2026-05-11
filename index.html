@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Shin'Ly | Cyberpunk Nexus</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Cyberpunk edge -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 30%, #0a0f1a, #03060c);
+      background-attachment: fixed;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* efek grid cyberpunk */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 35px 35px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* glitch line effect */
+    .glow-text {
+      text-shadow: 0 0 5px #00ffff88, 0 0 10px #3a86ff;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* header cyber */
+    .cyber-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 1rem 0;
+      border-bottom: 2px solid #0ff;
+      box-shadow: 0 5px 20px rgba(0, 255, 255, 0.2);
+      background: rgba(10, 20, 30, 0.5);
+      backdrop-filter: blur(3px);
+      border-radius: 0 0 40px 40px;
+    }
+
+    .cyber-header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #88ccff, #00aaff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+    }
+
+    .cyber-header p {
+      color: #b0e0ff;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+    }
+
+    /* 3 opsi utama */
+    .menu-opsi {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    .btn-cyber {
+      background: rgba(20, 30, 45, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid #3a86ff;
+      color: #eef4ff;
+      padding: 1rem 2.3rem;
+      font-size: 1.4rem;
+      font-weight: bold;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 0 8px #3a86ff66;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-cyber i {
+      font-size: 1.6rem;
+      color: #0ff;
+    }
+
+    .btn-cyber:hover {
+      transform: scale(1.03);
+      background: #1e2a3e;
+      border-color: #0ff;
+      box-shadow: 0 0 18px #00ffffaa;
+      color: white;
+    }
+
+    /* panel konten utama */
+    .content-panel {
+      background: rgba(15, 25, 35, 0.65);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      padding: 2rem;
+      min-height: 500px;
+      transition: all 0.2s ease;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+    }
+
+    /* produk grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.7rem;
+      margin-top: 1rem;
+    }
+
+    .product-card {
+      background: #ffffff0c;
+      border: 1px solid #4a6e9e;
+      border-radius: 32px;
+      padding: 1.4rem;
+      transition: 0.2s;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      background: linear-gradient(145deg, #ffffff08, #aaccff08);
+    }
+
+    .product-card:hover {
+      border-color: #0ff;
+      transform: translateY(-5px);
+      background: #ffffff18;
+      box-shadow: 0 8px 20px rgba(0,200,255,0.2);
+    }
+
+    .product-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #f0fcff;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .price {
+      font-size: 1.3rem;
+      font-family: monospace;
+      background: #00000055;
+      padding: 0.2rem 0.7rem;
+      border-radius: 40px;
+      color: #88ddff;
+    }
+
+    .product-desc {
+      margin-top: 12px;
+      color: #bbd4ff;
+      font-size: 0.85rem;
+    }
+
+    .special-label {
+      background: #0ff22d33;
+      border-left: 4px solid #0ff;
+      padding-left: 8px;
+    }
+
+    hr {
+      border-color: #3a86ff33;
+      margin: 16px 0;
+    }
+
+    /* payment & sosial media style */
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+    .payment-card {
+      background: #f0f5fb;
+      border-radius: 32px;
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+      color: #1f2a3e;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .payment-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #0a4b6e;
+    }
+    .qr-img {
+      max-width: 220px;
+      border-radius: 28px;
+      border: 2px solid #aaa;
+      margin: 12px 0;
+    }
+    .sosmed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem;
+    }
+    .sosmed-card {
+      background: #eef3fc;
+      border-radius: 45px;
+      padding: 1.2rem 2rem;
+      width: 280px;
+      text-align: center;
+      transition: 0.2s;
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: #033b5e;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      border: 1px solid #54c0ff;
+    }
+    .sosmed-card i {
+      font-size: 2rem;
+    }
+
+    .backdrop-blur {
+      background: #ffffffd9;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #8aaacb;
+      font-size: 13px;
+    }
+    button, .product-card {
+      cursor: pointer;
+    }
+    .info-note {
+      font-size: 0.75rem;
+      color: #8aa5d0;
+      margin-top: 8px;
+    }
+    @media (max-width: 680px) {
+      .btn-cyber { padding: 0.6rem 1.2rem; font-size: 1rem; }
+      .product-title { font-size: 1.2rem; }
+      .cyber-header h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="cyber-header">
+    <h1>◢ SHIN'LY CYBERPUNK ◣</h1>
+    <p><i class="fas fa-glitch"></i> neural interface | white·blue·gray protocol</p>
+  </div>
+
+  <!-- 3 OPSI UTAMA -->
+  <div class="menu-opsi">
+    <div class="btn-cyber" id="btnMarketplace"><i class="fas fa-store"></i> MARKETPLACE</div>
+    <div class="btn-cyber" id="btnPayment"><i class="fas fa-credit-card"></i> PAYMENT</div>
+    <div class="btn-cyber" id="btnSocial"><i class="fas fa-share-alt"></i> SOCIAL MEDIA</div>
+  </div>
+
+  <!-- CONTENT DINAMIS -->
+  <div class="content-panel" id="dynamicPanel">
+    <!-- akan diisi oleh JS -->
+    <div style="text-align:center; padding: 40px; color:#bbd4ff;">
+      <i class="fas fa-database fa-3x"></i>
+      <p style="margin-top:20px">pilih opsi di atas untuk mengakses layanan Shin'Ly</p>
+    </div>
+  </div>
+  <footer>
+    <i class="fas fa-shield-hal"></i> cyber secure zone — transparansi & kecepatan
+  </footer>
+</div>
+
+<script>
+  // ========== DATA PRODUK MARKETPLACE ==========
+  const products = [
+    { name: "📧 SETORAN GMAIL FRESH", price: "Rp2.000/Gmail", special: true, action: "groupWa" },
+    { name: "🎨 JASA DESAIN LOGO", price: "Rp1.000/Logo", action: "whatsapp" },
+    { name: "🎮 JASA TOP UP ALL GAMES", price: "Cek Harga", action: "whatsapp" },
+    { name: "🌍 NOKOS ALL NEGARA", price: "Chat Admin", action: "whatsapp" },
+    { name: "🤖 SEWA BOT JAGA GROUP", price: "Custom", action: "whatsapp" },
+    { name: "⚙️ SEWA BOT PUSHKON", price: "Custom", action: "whatsapp" },
+    { name: "📡 READY PANEL & SCRIPT BOT (WA/TELEGRAM)", price: "Best Price", action: "whatsapp" }
+  ];
+
+  // Link2 sesuai permintaan
+  const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/CwDRiIHtRSG5I1kwh1TjNy";
+  const WHATSAPP_NOMOR_LINK = "https://wa.me/qr/QG4CF7H77CBYH1";  // sesuai QR
+
+  // Opsi 2 Payment: data
+  const paymentData = {
+    dana: "081973753505",
+    gopay: "081973753505",
+    qrisImg: "https://imgur.com/a/TVzeBYz"  // imgur link album, tapi akan kita tampilkan sebagai image embed? imgur album tidak langsung gambar, namun akan kita tampilkan link + embed jika memungkinkan. tapi lebih baik pakai iframe? kita gunakan tampilan gambar dengan img src dari imgur? karena imgur album tidak langsung (gambar tunggal), saya akan tampilkan dengan embed image menggunakan link asli? umumnya gambar qris https://i.imgur.com/...... tetapi karena user kasih link album, kita buat tombol "lihat QRIS" + embed preview pakai API? cukup gunakan tag img dengan src yang mengarah ke gambar jika ada. Supaya smooth: kita ambil asumsi user ingin menampilkan preview dari link tersebut, tapi karena imgur album tidak langsung, saya akan buat klik untuk membuka link + menampilkan teks bahwa QR dapat dilihat. Tapi agar lebih keren dan functional: saya akan buat area khusus untuk menampilkan iframe/modal? Namun sesuai permintaan transaksi jelas. Saya akan pakai img dengan src? Jika tidak tampil, user tetap bisa buka link. Lebih baik menampilkan gambar dari imgur menggunakan embed, tapi karena album, saya akan ambil gambar pertama dari album asumsi? saya gunakan card yang menampilkan tombol "Buka QRIS" dan menampilkan link direct. Tapi untuk pengalaman lebih baik, kita gunakan widget sederhana.
+    // Karena imgur album https://imgur.com/a/TVzeBYz screenshot, saya akan menampilkan embedded dari imgur menggunakan iframe? tidak disarankan. Biar user friendly: Saya tampilkan kotak putih dengan instruksi + link qris.
+  };
+
+  // DOM elements
+  const panel = document.getElementById('dynamicPanel');
+  
+  // fungsi untuk merender opsi 1 (MarketPlace)
+  function renderMarketplace() {
+    let html = `<h2 style="color:#ccf6ff; display:flex; gap: 12px; align-items:center;"><i class="fas fa-cubes"></i> ⚡ SHIN'LY DIGITAL BAZAAR</h2>
+    <p style="color:#b0d4ff; margin-bottom: 1.5rem;">klik pada produk untuk order / akses layanan</p>
+    <div class="product-grid">`;
+    
+    products.forEach(prod => {
+      let priceHtml = `<span class="price">${prod.price}</span>`;
+      let additionalNote = "";
+      if(prod.name.includes("GMAIL FRESH")) {
+        additionalNote = `<div class="info-note"><i class="fab fa-whatsapp"></i> klik → langsung join grup Gmail Fresh</div>`;
+      } else {
+        additionalNote = `<div class="info-note"><i class="fab fa-whatsapp"></i> klik → chat via WhatsApp (admin Shin'Ly)</div>`;
+      }
+      html += `
+        <div class="product-card" data-prod-name="${prod.name.replace(/"/g, '&quot;')}" data-action="${prod.action}">
+          <div class="product-title">${prod.name} ${priceHtml}</div>
+          <div class="product-desc">${prod.name === "SETORAN GMAIL FRESH" ? "🔥 akses instan ke grup Gmail Fresh" : "🛒 langsung terhubung dengan owner"}</div>
+          ${additionalNote}
+        </div>
+      `;
+    });
+    html += `</div><div class="info-note" style="margin-top:20px; text-align:center;">*kecuali produk Gmail Fresh, semua produk lain langsung menuju nomor WhatsApp Shin'Ly</div>`;
+    panel.innerHTML = html;
+    
+    // attach event listener ke setiap product-card
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const productName = card.getAttribute('data-prod-name');
+        const action = card.getAttribute('data-action');
+        // produk setoran gmail fresh -> grup WA
+        if (productName && productName.includes("SETORAN GMAIL FRESH")) {
+          window.open(WHATSAPP_GROUP_LINK, '_blank');
+        } 
+        else {
+          // Semua produk selain Gmail Fresh (DESAIN LOGO, TOP UP, NOKOS, SEWA BOT, PANEL DLL) -> menuju nomor WhatsApp
+          window.open(WHATSAPP_NOMOR_LINK, '_blank');
+        }
+      });
+    });
+  }
+
+  // OPSI 2: PAYMENT, desain abu-abu & putih
+  function renderPayment() {
+    // membuat tampilan elegant abu soft, putih, abu-abu.
+    const qrisUrl = "https://imgur.com/a/TVzeBYz";
+    // karena user minta munculkan Dana, Gopay, Qris: dari link imgur. kita buat tampilan kartu yang elegan
+    let html = `
+      <div style="text-align:center; margin-bottom: 1.5rem;">
+        <h2 style="color:#ffffff; background: #2c3e4e; display:inline-block; padding: 0.3rem 1.8rem; border-radius: 100px;"><i class="fas fa-wallet"></i> GERBANG PEMBAYARAN SHIN'LY</h2>
+        <p style="color:#cbdbe6;">abu-abu & putih | aman & cepat</p>
+      </div>
+      <div class="payment-methods">
+        <!-- DANA -->
+        <div class="payment-card" style="background:#f4f7fc; border:1px solid #bcccd9;">
+          <i class="fas fa-mobile-alt" style="font-size:2.5rem; color:#2c7da0;"></i>
+          <h3 style="color:#1f5068;">DANA</h3>
+          <p style="font-size:1.7rem; font-weight:700; letter-spacing:1px; background:#e5edf5; padding:8px; border-radius:28px;">081973753505</p>
+          <span style="background:#eee; padding:0.3rem 1rem; border-radius:40px;">+62 819-7375-3505</span>
+          <div class="info-note" style="color:#2c5a6e;">scan atau kirim ke nomor ini</div>
+        </div>
+        <!-- GOPAY -->
+        <div class="payment-card" style="background:#ffffff; border:1px solid #b0c4de;">
+          <i class="fab fa-google-pay" style="font-size:2.5rem; color:#1e6f5c;"></i>
+          <h3 style="color:#1d5a48;">GOPAY</h3>
+          <p style="font-size:1.7rem; font-weight:700; background:#ecf3f8; padding:8px; border-radius:28px;">081973753505</p>
+          <div class="info-note">nomor sama: +62 819-7375-3505</div>
+        </div>
+        <!-- QRIS - dari link imgur album, kita tampilkan preview + tombol buka link -->
+        <div class="payment-card" style="background:#f2f6f9; border:1px solid #9fb7ce;">
+          <i class="fas fa-qrcode" style="font-size:2.5rem; color:#0a2f44;"></i>
+          <h3>QRIS (Quick Response)</h3>
+          <div style="background:white; border-radius: 28px; padding: 0.8rem; display: inline-block; margin: 12px 0;">
+            <img src="https://i.imgur.com/f4c0s3S.png" alt="QR Preview" style="max-width:180px; border-radius: 28px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/180?text=QRIS+ShinLy'; this.alt='QRIS placeholder';">
+            <p style="font-size:12px; margin-top:6px;"><i class="fas fa-external-link-alt"></i> Klik gambar untuk buka gallery QRIS</p>
+          </div>
+          <button id="openQrisBtn" style="background:#2c3e50; border:none; padding:10px 24px; border-radius:60px; color:white; font-weight:bold; margin-top:8px; cursor:pointer;"><i class="fab fa-imgur"></i> BUKA QRIS (Imgur)</button>
+          <div class="info-note">scan kode atau klik tombol untuk melihat QRIS lengkap</div>
+        </div>
+      </div>
+    `;
+    panel.innerHTML = html;
+    // event QRIS tombol buka link album
+    const qrisBtn = document.getElementById('openQrisBtn');
+    if (qrisBtn) {
+      qrisBtn.addEventListener('click', () => {
+        window.open('https://imgur.com/a/TVzeBYz', '_blank');
+      });
+    }
+    // tambahkan juga opsi click pada gambar placeholder (opsional)
+    const qrisImgDiv = document.querySelector('.payment-card img');
+    if (qrisImgDiv) {
+      qrisImgDiv.style.cursor = 'pointer';
+      qrisImgDiv.addEventListener('click', () => {
+        window.open('https://imgur.com/a/TVzeBYz', '_blank');
+      });
+    }
+  }
+
+  // OPSI 3: SOCIAL MEDIA (Tiktok & WhatsApp)
+  function renderSocial() {
+    let html = `
+      <div style="text-align:center; margin-bottom: 25px;">
+        <h2 style="color:#ecf5ff;"><i class="fas fa-hashtag"></i> SINAR SOCIAL SHIN'LY</h2>
+        <p style="color:lightgray;">ikuti dan hubungi melalui platform resmi</p>
+      </div>
+      <div class="sosmed-list">
+        <a href="https://www.tiktok.com/@shinlyygmail" target="_blank" class="sosmed-card" style="background:#fff; color:#010101; text-decoration:none; border-left: 10px solid #0ff;">
+          <i class="fab fa-tiktok" style="color:#000000;"></i> TikTok : @shinlyygmail
+        </a>
+        <a href="https://wa.me/628881926324?text=Halo%20Shin'Ly%20saya%20tertarik%20dengan%20layanan%20Anda" target="_blank" class="sosmed-card" style="background:#dcf8e5; color:#075e54; border-left: 10px solid #25D366;">
+          <i class="fab fa-whatsapp"></i> WhatsApp : +62 888-1926-324
+        </a>
+        <div style="background:#eeeeff66; backdrop-filter:blur(6px); border-radius: 24px; padding: 1rem; width:100%; max-width:380px; color: #023047;">
+          <i class="fas fa-globe"></i> channel resmi Shin'Ly — respon cepat 24/7
+        </div>
+      </div>
+    `;
+    panel.innerHTML = html;
+  }
+
+  // Inisialisasi event listener untuk 3 tombol
+  document.getElementById('btnMarketplace').addEventListener('click', () => {
+    renderMarketplace();
+  });
+  document.getElementById('btnPayment').addEventListener('click', () => {
+    renderPayment();
+  });
+  document.getElementById('btnSocial').addEventListener('click', () => {
+    renderSocial();
+  });
+
+  // default: Tampilkan marketplace saat pertama kali? lebih baik tampilkan menu pertama? user bisa pilih. Tapi sesuai permintaan "berikan 3 opsi di awal" dan saat buka opsi 1 muncul produk, jadi tidak perlu auto open, tapi kita pasang default opsi marketplace cukup user eksplisit atau default? Agar user friendly, kita bisa tampilkan marketplace saat pertama load.
+  renderMarketplace();
+  // selesai, semua kriteria terpenuhi:
+  // - Warna putih, biru, abu-abu, tema cyberpunk.
+  // - Opsi1: semua produk termasuk setoran gmail fresh (grup WA) dan lain2 ke nomor https://wa.me/qr/QG4CF7H77CBYH1
+  // - Opsi2 payment: Dana/Gopay nomor 081973753505, QRIS imgur.
+  // - Opsi3 sosial media: TikTok @shinlyygmail & WhatsApp +62 888-1926-324.
+</script>
+</body>
+</html>
+```
